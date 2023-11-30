@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %} Home Page {% endblock %}
+
+{% block content %}
+
+    <h1>Home page</h1>
+    <hr>
+    <div>
+        {% for blog in blogs %}
+
+            <h3><a href="{% url 'blog:blog_detail' blog.pk %}">{{ blog.title|upper }}</a></h3>
+            <img src="{{ blog.image.url }}">
+            <p>{{ blog.description|truncatewords:20 }}</p>
+            <p>{{ blog.created|date:"Y-m-d h:i" }}</p>
+            <p>{{ blog.views|default:"Ko'rishlar soni yuq" }}</p>
+            <p>{{ blog.category.name }}</p>
+            {% for tag in blog.tags.all %}
+                {{ tag.name }} |
+            {% endfor %}
+            <hr>
+    {% endfor %}
+    </div>
+
+{% endblock %}
