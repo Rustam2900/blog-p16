@@ -4,7 +4,8 @@
 {% block title %} {{  blog.title }} {% endblock %}
 
 {% block content %}
-
+    {{ text }}
+    <hr>
     <h3>{{ blog.title }}</h3>
     <img src="{{  blog.image.url }}">
     <p>{{ blog.description }}</p>
