@@ -11,4 +11,24 @@
     <p>{{ blog.views }}</p>
     <p>{{ blog.created|date:"Y/m/d h:i" }}</p>
 
+    <hr>
+
+    <div class="row">
+    <div class="col-6">
+        <p>Comment list</p>
+        {% for comment in blog.comments.all %}
+            <p>{{ comment.text }}</p>
+            <p>{{ comment.user }} | {{ comment.created|date:"Y-m-d h:i" }}</p>
+        {% endfor %}
+    </div>
+    <div class="col-6">
+        <form method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Save">
+        </form>
+    </div>
+
+    </div>
+
 {% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %} Tag create {% endblock %}
+
+{% block content %}
+
+    <h1>Tag create</h1>
+    <hr>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.name.label }}
+        {{ form.name }}
+        {{ form.name.help_text }}
+    <input type="submit", value="Save">
+    </form>
+
+{% endblock %}

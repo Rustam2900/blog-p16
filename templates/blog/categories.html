@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %} Category list {% endblock %}
+
+{% block content %}
+
+    <h1>Category list</h1>
+    <hr>
+    <div>
+        {% for category in categories %}
+            <h3><a href="{% url 'blog:blog_of_category' category.slug %}">{{ category.name|upper }}</a></h3>
+            {% if category.image %}
+                <img src="{{ category.image.url }}">
+            {% else %}
+                <img src="{% static 'img/image_not_found.jpg' %}">
+            {% endif %}
+            <p>{{ category.description|default:"Description not yet written" }}</p>
+            <p>{{ category.blog_set.count }}</p>
+            <hr>
+    {% endfor %}
+    </div>
+
+{% endblock %}

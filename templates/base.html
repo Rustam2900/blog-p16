@@ -27,6 +27,14 @@
             {% else %}
             No data
             {% endif %}
+            <hr>
+            {% if tags %}
+                {% for tag in tags %}
+                    <div><a href="{% url 'blog:blog_of_tags' tag.slug %}">{{ tag.name }}</a></div>
+                {% endfor %}
+            {% else %}
+            No data
+            {% endif %}
         </div>
     </div>
 </div>
