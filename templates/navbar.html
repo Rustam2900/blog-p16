@@ -23,9 +23,21 @@
                         <li><a class="dropdown-item" href="{% url 'blog:tag_create' %}">Tag</a></li>
                     </ul>
                 </li>
+                {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    <a class="nav-link" href="#">{{ user.username }}</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'account:logout' %}">Logout</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'account:login' %}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'account:sign_up' %}">Sign Up</a>
+                </li>
+                {% endif %}
             </ul>
             <form class="d-flex">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
