@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib import messages
-from django.urls import reverse
+
 
 from .forms import SignUpForm, UserUpdateForm
 
@@ -35,7 +35,12 @@ def sign_up(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            # subject = 'Test project'
+            # message = f'Hi {user.username}, thank you for registering in blog web sayt.'
+            # email_from = settings.EMAIL_HOST_USER
+            # recipient_list = [user.email, ]
+            # send_mail(subject, message, email_from, recipient_list)
             messages.success(request, 'Siz ruyxatdan o`tdingiz')
             return redirect('account:login')
         messages.warning(request, 'qayta urinib kuring')

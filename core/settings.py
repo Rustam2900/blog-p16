@@ -14,6 +14,10 @@ from pathlib import Path
 
 from django.urls import reverse_lazy
 
+from dotenv import dotenv_values
+
+config = dotenv_values(".env")
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -79,16 +83,24 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     "default": {
+#         "NAME": "blog_web",
+#         "ENGINE": "django.db.backends.postgresql_psycopg2",
+#         "USER": "postgres",
+#         "PASSWORD": "19951109",
+#         "HOST": 'localhost',
+#         "PORT": 5432
+#     }
+# }
+
 DATABASES = {
-    "default": {
-        "NAME": "blog_web",
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "USER": "postgres",
-        "PASSWORD": "19951109",
-        "HOST": 'localhost',
-        "PORT": 5432
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -138,3 +150,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'account.User'
 AUTHENTICATION_BACKENDS = ['account.backends.EmailOrUsernameBackend']
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'amirovbobur52@gmail.com'
+EMAIL_HOST_PASSWORD = config['EMAIL_HOST_PASSWORD']
