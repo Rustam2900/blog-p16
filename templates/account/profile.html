@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %} Profile Page {% endblock %}
+
+{% block content %}
+
+    <h1>Profile page</h1>
+    <hr>
+    <p>First name: {{ user.first_name }}</p>
+    <p>Last name: {{ user.last_name }}</p>
+    <p>Username: {{ user.username }}</p>
+    <p>Email: {{ user.email }}</p>
+    <p>Email: {{ user.phone_number }}</p>
+    <hr>
+    <a class="btn btn-success" href="{% url 'account:change_password' %}">Password change</a>
+    <a class="btn btn-primary" href="{% url 'account:user_profile_edit' %}">Profile change</a>
+{% endblock %}
