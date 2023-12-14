@@ -9,6 +9,9 @@ from .models import Blog, Category, Tag
 
 def home(request):
     blogs = Blog.objects.all()
+    search = request.GET.get('search')
+    if search is not None:
+        blogs = blogs.filter(title__icontains=search)
     context = {
         'blogs': blogs,
         # 'categories': categories()

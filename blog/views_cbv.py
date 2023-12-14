@@ -4,16 +4,27 @@ from django.urls import reverse, reverse_lazy
 from django.views import View
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import FormMixin, CreateView
+from django_filters.views import FilterView
 
 from .models import Blog
 from .mixins import Base
 from .forms import CommentForm, BlogForm
+from .filters import BlogFilter
 
 
-class BlogListView(Base, ListView):
+class BlogListView(Base, FilterView):
     model = Blog
     template_name = 'blog/home.html'
     context_object_name = 'blogs'
+    filterset_class = BlogFilter
+
+
+    # def get_queryset(self):
+    #     qs = super().get_queryset()
+    #     sreach = self.request.GET.get("search")
+    #     if sreach is not None:
+    #         return qs.filter(title__icontains=sreach)
+    #     return qs
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -55,6 +66,12 @@ class BlogDetailView(Base, FormMixin, DetailView):
     context_object_name = 'blog'
     template_name = 'blog/blog_detail.html'
     form_class = CommentForm
+
+    def get_object(self, queryset=None):
+        obj = super().get_object()
+        obj.views += 1
+        obj.save()
+        return obj
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

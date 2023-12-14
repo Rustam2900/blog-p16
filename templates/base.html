@@ -1,3 +1,4 @@
+{% load uppercase %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,7 +29,7 @@
         <div class="col-3">
             {% if categories %}
                 {% for category in categories %}
-                    <div><a href="{% url 'blog:blog_of_category' category.slug %}">{{ category.name }}</a></div>
+                    <div><a href="{% url 'blog:blog_of_category' category.slug %}">{{ category.name }}| {{ category.pk|count_blog }}</a></div>
                 {% endfor %}
             {% else %}
             No data
@@ -36,7 +37,7 @@
             <hr>
             {% if tags %}
                 {% for tag in tags %}
-                    <div><a href="{% url 'blog:blog_of_tags' tag.slug %}">{{ tag.name }}</a></div>
+                    <div><a href="{% url 'blog:blog_of_tags' tag.slug %}">{{ tag.name }} </a></div>
                 {% endfor %}
             {% else %}
             No data
