@@ -30,11 +30,12 @@ SECRET_KEY = 'django-insecure-l9-x2l6ey9v354kvrlc0@qdj#6__dz3%t(tqyizii2_3_lt@6w
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_filters',
+    'import_export',
 
     # local
     'blog.apps.BlogConfig',
@@ -136,7 +138,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR / 'statis/']
+
+if DEBUG:
+    STATICFILES_DIRS = [BASE_DIR / 'static/']
+else:
+    STATIC_ROOT = 'static/'
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media/'

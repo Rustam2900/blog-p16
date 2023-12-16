@@ -8,13 +8,17 @@ from .managers import TagCustumManager
 User = get_user_model()
 
 class Category(models.Model):
-    name = models.CharField(max_length=100)
-    slug = models.SlugField(max_length=100, unique=True, blank=True)
-    image = models.ImageField(upload_to='category/', null=True, blank=True)
-    description = models.TextField(null=True, blank=True)
+    name = models.CharField(max_length=100, verbose_name='nomi')
+    slug = models.SlugField('slug', max_length=100, unique=True, blank=True)
+    image = models.ImageField('rams', upload_to='category/', null=True, blank=True)
+    description = models.TextField('tarif', null=True, blank=True)
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = 'Kategoriya'
+        verbose_name_plural = 'Kategoriyalar'
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -50,6 +54,10 @@ class Blog(models.Model):
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        verbose_name = 'Blog'
+        verbose_name_plural = 'Bloglar'
 
 
 
